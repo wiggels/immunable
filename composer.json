@@ -1,0 +1,28 @@
+{
+  "name": "wiggels/immunable",
+  "description": "Hack HL7 Immunization Interface Engine",
+  "keywords": ["hl7", "immunization", "hhvm", "hack", "hie", "cdc", "onc"],
+  "homepage": "https://github.com/wiggels/immunable",
+  "license": "MIT",
+  "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "^5.1.0",
+    "91carriage/phpunit-hhi": "^5.1.0"
+  },
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
+  },
+  "authors": [
+    {
+      "name": "R Hunter Wigelsworth",
+      "email": "wiggels@gmail.com"
+    },
+    {
+      "name": "ediHQ, LLC",
+      "email": "opensource@edihq.com"
+    }
+  ],
+  "scripts": {}
+}
