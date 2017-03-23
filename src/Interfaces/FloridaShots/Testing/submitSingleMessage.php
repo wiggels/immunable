@@ -2,13 +2,18 @@
 
 namespace Immunable\Interfaces\FloridaShots\Testing;
 
-class connectivityTestFL extends \Immunable\Interfaces\FloridaShots\SOAP {
+class submitSingleMessage extends \Immunable\Interfaces\FloridaShots\SOAP {
 
   public function __construct(string $username, string $password, ?string $facilityId): void {
     $this->username = $username;
     $this->password = $password;
+    if ($facilityId === NULL){
+      $this->facilityId = '';
+    } else {
+      $this->facilityId = $facilityId;
+    }
     $this->url = 'https://www.flshots.com/staging/interop/InterOp.Service.HL7IISMethods.cls';
-    $this->action = 'connectivityTestFL';
+    $this->action = 'submitSingleMessage';
   }
 
   public function generateMessage(string $data): void {
@@ -17,18 +22,20 @@ class connectivityTestFL extends \Immunable\Interfaces\FloridaShots\SOAP {
       '<soap:Header/>' .
       '<soap:Body>' .
       '<urn:%s>' .
-      '<urn:echoBack>%s</urn:echoBack>' .
       '<urn:username>%s</urn:username>' .
       '<urn:password>%s</urn:password>' .
+      '<urn:facilityID>%s</urn:facilityID>' .
+      '<urn:hl7Message><![CDATA[%s]]></urn:hl7Message>' .
       '</urn:%s>' .
       '</soap:Body>' .
       '</soap:Envelope>',
       $this->soapXmlns,
       $this->urnXmlns,
       $this->action,
-      htmlspecialchars(trim($data)),
       $this->username,
       $this->password,
+      $this->facilityId,
+      trim($data),
       $this->action
     );
   }
@@ -53,6 +60,14 @@ class connectivityTestFL extends \Immunable\Interfaces\FloridaShots\SOAP {
     curl_setopt($ch, CURLOPT_POSTFIELDS, $this->message);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     return await \HH\Asio\curl_exec($ch);
+  }
+
+  public function printMessage(): string {
+    if ($this->message !== NULL){
+      return $this->message;
+    } else {
+      return 'CANNOT PRINT NULL MESSAGE!';
+    }
   }
 
 }

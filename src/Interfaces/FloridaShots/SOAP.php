@@ -11,8 +11,9 @@ abstract class SOAP {
   protected string $soapXmlns = 'http://www.w3.org/2003/05/soap-envelope';
   protected string $urnXmlns = 'urn:cdc:iisb:2011';
   protected ?string $message = NULL;
+  protected ?string $facilityId = NULL;
 
-  abstract public function __construct(string $username, string $password);
+  abstract public function __construct(string $username, string $password, ?string $facilityId);
 
   abstract public function generateMessage(string $data): void;
 
