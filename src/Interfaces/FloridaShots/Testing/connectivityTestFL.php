@@ -1,8 +1,8 @@
 <?hh // strict
 
-namespace Immunable\Interface\FloridaShots\Testing;
+namespace Immunable\Interfaces\FloridaShots\Testing;
 
-class connectivityTestFL extends \Immunable\Interface\FloridaShots\SOAP {
+class connectivityTestFL extends \Immunable\Interfaces\FloridaShots\SOAP {
 
   public function __construct(string $username, string $password): void {
     $this->username = $username;

@@ -1,13 +1,13 @@
 <?hh // strict
 
-namespace Immunable\Interface\FloridaShots;
+namespace Immunable\Interfaces\FloridaShots;
 
 abstract class SOAP {
 
-  abstract protected string $url;
-  abstract protected string $username;
-  abstract protected string $password;
-  abstract protected string $action;
+  protected string $url;
+  protected string $username;
+  protected string $password;
+  protected string $action;
   protected string $soapXmlns = 'http://www.w3.org/2003/05/soap-envelope';
   protected string $urnXmlns = 'urn:cdc:iisb:2011';
   protected ?string $message = NULL;
