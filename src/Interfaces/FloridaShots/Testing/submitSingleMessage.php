@@ -12,7 +12,7 @@ class submitSingleMessage extends \Immunable\Interfaces\FloridaShots\SOAP {
     } else {
       $this->facilityId = $facilityId;
     }
-    $this->url = 'https://www.flshots.com/staging/interop/InterOp.Service.HL7IISMethods.cls';
+    $this->url = 'http://www.flshots.com/staging/interop/InterOp.Service.HL7IISMethods.cls';
     $this->action = 'submitSingleMessage';
   }
 
@@ -25,7 +25,7 @@ class submitSingleMessage extends \Immunable\Interfaces\FloridaShots\SOAP {
       '<urn:username>%s</urn:username>' .
       '<urn:password>%s</urn:password>' .
       '<urn:facilityID>%s</urn:facilityID>' .
-      '<urn:hl7Message><![CDATA[%s]]></urn:hl7Message>' .
+      '<urn:hl7Message>%s</urn:hl7Message>' .
       '</urn:%s>' .
       '</soap:Body>' .
       '</soap:Envelope>',
@@ -35,7 +35,7 @@ class submitSingleMessage extends \Immunable\Interfaces\FloridaShots\SOAP {
       $this->username,
       $this->password,
       $this->facilityId,
-      trim($data),
+      $data,
       $this->action
     );
   }
@@ -51,7 +51,7 @@ class submitSingleMessage extends \Immunable\Interfaces\FloridaShots\SOAP {
   protected async function sendMessage(): Awaitable<string> {
     $headers = Vector{};
     $headers[] = 'Accept-Encoding: gzip,deflate';
-    $headers[] = 'Content-Type: application/soap+xml;charset=UTF-8;action="urn:cdc:iisb:2011:connectivityTestFL"';
+    $headers[] = 'Content-Type: application/soap+xml;charset=UTF-8;action="urn:cdc:iisb:2011:' . $this->action . '"';
     $headers[] = 'Connection: Keep-Alive';
     $headers[] = 'Content-Length: ' . strlen($this->message);
     $ch = curl_init($this->url);
