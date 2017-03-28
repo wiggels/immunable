@@ -4,7 +4,9 @@
   "keywords": ["hl7", "immunization", "hhvm", "hack", "hie", "cdc", "onc"],
   "homepage": "https://github.com/wiggels/immunable",
   "license": "MIT",
-  "require": {},
+  "require": {
+    "fredemmott/type-assert": "1.1"
+  },
   "require-dev": {
     "phpunit/phpunit": "^5.1.0",
     "91carriage/phpunit-hhi": "^5.1.0"
