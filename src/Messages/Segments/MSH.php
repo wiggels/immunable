@@ -56,7 +56,7 @@ abstract class MSH {
             $this->sendingFacility,
             $this->receivingApplication,
             $this->receivingFacility,
-            $this->dateTime->format('YmdHis-0500'),
+            $this->dateTime->format('YmdHisO'),
             $this->security,
             $this->messageType,
             $this->messageControlId,
