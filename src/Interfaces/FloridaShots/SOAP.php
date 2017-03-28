@@ -28,7 +28,7 @@ abstract class SOAP {
   protected async function sendMessage(): Awaitable<string> {
     $headers = Vector{};
     $headers[] = 'Accept-Encoding: gzip,deflate';
-    $headers[] = 'Content-Type: application/soap+xml;charset=UTF-8;action="urn:cdc:iisb:2011:connectivityTestFL"';
+    $headers[] = 'Content-Type: application/soap+xml;charset=UTF-8;action="' . $this->urnXmlns . ':' . $this->action . '"';
     $headers[] = 'Connection: Keep-Alive';
     $headers[] = 'Content-Length: ' . strlen($this->message);
     $ch = curl_init($this->url);
@@ -37,6 +37,14 @@ abstract class SOAP {
     curl_setopt($ch, CURLOPT_POSTFIELDS, $this->message);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     return await \HH\Asio\curl_exec($ch);
+  }
+
+  public function printMessage(): string {
+    if ($this->message !== NULL){
+      return $this->message;
+    } else {
+      return 'CANNOT PRINT NULL MESSAGE!';
+    }
   }
 
 }
