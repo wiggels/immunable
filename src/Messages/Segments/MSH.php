@@ -8,7 +8,7 @@ namespace Immunable\Messages\Segments;
 
 abstract class MSH {
   // Protected variables -- only changed by class or extending class
-  protected string $encodingCharacters = '^~\&amp;';
+  protected string $encodingCharacters = '^~\&';
   protected string $sendingApplication = 'Immunable';
   protected string $messageControlId;
   protected string $messageType;
