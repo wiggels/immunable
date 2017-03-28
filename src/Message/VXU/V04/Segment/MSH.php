@@ -6,23 +6,27 @@
 namespace Immunable\Message\VXU\V04\Segment;
 
 class MSH {
-  protected string $encodingCharacters = '^~\&';
+  // Protected variables -- only changed by class or extending class
+  protected string $encodingCharacters = '^~\&amp;';
   protected string $sendingApplication = 'Immunable';
-  protected string $sendingFacility = 'ediHQ';
+  protected string $messageType = 'VXU^V04^VXU_V04';
+  protected \DateTime $dateTime;
+  protected string $versionId = "2.5.1";
+  protected string $characterSet = 'ASCII';
+
+  // Public variables -- must me set/changed with every MSH seg
+  // Attempted to add defaults to allow CDC testing compliance -- but not promised
+  public string $sendingFacility = 'ediHQ';
   public string $receivingApplication = '1.4.2-SNAPSHOT';
   public string $receivingFacility = 'NIST Test Iz Reg';
-  protected \DateTime $dateTime;
   public string $security = '';
-  protected string $messageType = 'VXU^V04^VXU_V04';
   public string $messageControlId;
   public string $processingId = "P";
-  protected string $versionId = "2.5.1";
   public string $sequenceNumber = '';
   public string $continuationPointer = '';
   public string $acceptAcknowledgmentType = 'ER';
   public string $applicationAcknowledgmentType = 'AL';
   public string $countryCode = 'USA';
-  protected string $characterSet = 'ASCII';
   public string $principalLanguage = 'en^English^639-1^eng^English^639-2';
   public string $alternateCharacterSetHandling = '';
   public string $messageProfileId = 'Z22^CDCPHINVS';
@@ -36,7 +40,7 @@ class MSH {
     );
   }
 
-  public function return(): string {
+  public function generateSegment(): string {
     return sprintf(
       "MSH|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s\r",
             $this->encodingCharacters,
