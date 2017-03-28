@@ -3,7 +3,7 @@
 // Patient Identification Segment
 //   Primary means of communicating patient identification information
 
-namespace Immunable\Message\VXU\V04\Segment;
+namespace Immunable\Messages\VXU\V04\Segments;
 
 class PID {
   protected int $setId;
