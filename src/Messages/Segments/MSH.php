@@ -30,6 +30,10 @@ abstract class MSH {
   public string $countryCode = 'USA';
   public string $principalLanguage = 'en^English^639-1^eng^English^639-2';
   public string $alternateCharacterSetHandling = '';
+  public string $sendingResponsibleOrganization = '';
+  public string $receivingResponsibleOrganization = '';
+  public string $sendingNetworkAddress = '';
+  public string $receivingNetworkAddress = '';
 
   // Concrete class must define contruct function that returns void
   // Constructor MUST set messageControlId string!
@@ -45,8 +49,8 @@ abstract class MSH {
   // Define function to create MSH segment
   //  > Could change in future to add more values and checking
   public function generateSegment(): string {
-    return sprintf(
-      "MSH|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s\r",
+    $segment = sprintf(
+      "MSH|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s",
             $this->encodingCharacters,
             $this->sendingApplication,
             $this->sendingFacility,
@@ -66,7 +70,13 @@ abstract class MSH {
             $this->characterSet,
             $this->principalLanguage,
             $this->alternateCharacterSetHandling,
-            $this->messageProfileId
+            $this->messageProfileId,
+            $this->sendingResponsibleOrganization,
+            $this->receivingResponsibleOrganization,
+            $this->sendingNetworkAddress,
+            $this->receivingNetworkAddress
     );
+    $segment = rtrim($segment, '|') . "\r";
+    return $segment;
   }
 }
