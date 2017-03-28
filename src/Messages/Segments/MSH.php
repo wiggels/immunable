@@ -46,11 +46,19 @@ abstract class MSH {
     return $this->messageControlId;
   }
 
+  // Provide public function to set the messageControlId from class instance
+  public function setControlId(string $controlId): void {
+    $this->messageControlId = sprintf(
+      "%.20s",
+      $controlId
+    );
+  }
+
   // Define function to create MSH segment
   //  > Could change in future to add more values and checking
   public function generateSegment(): string {
     $segment = sprintf(
-      "MSH|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s",
+      "MSH|%s|%s|%s|%s|%s|%s|%s|%s|%.20s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s",
             $this->encodingCharacters,
             $this->sendingApplication,
             $this->sendingFacility,
