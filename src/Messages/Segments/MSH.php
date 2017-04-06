@@ -7,29 +7,29 @@
 namespace Immunable\Messages\Segments;
 
 abstract class MSH {
-  // Protected variables -- only changed by class or extending class
+  // Protected variables -- only changed by class methods or extending class
+  // All variables MUST be set by method or extending class to ensure compliance
+  // with the HL7 v2.5.1 standard
   protected string $encodingCharacters = '^~\&';
   protected string $sendingApplication = 'Immunable';
-  protected string $messageControlId;
-  protected string $messageType;
+  protected string $sendingFacility = 'ediHQ';
+  protected string $receivingApplication = '1.4.2-SNAPSHOT';
+  protected string $receivingFacility = 'NIST Test Iz Reg';
   protected \DateTime $dateTime;
+  protected string $security = '';
+  protected string $messageType;
+  protected string $messageControlId;
+  protected string $processingId = 'P';
   protected string $versionId = "2.5.1";
+  protected string $sequenceNumber = '';
+  protected string $continuationPointer = '';
+  protected string $acceptAcknowledgmentType = 'ER';
+  protected string $applicationAcknowledgmentType = 'AL';
+  protected string $countryCode = 'USA';
   protected string $characterSet = 'ASCII';
+  protected string $principalLanguage = 'en^English^639-1^eng^English^639-2';
+  protected string $alternateCharacterSetHandling = '';
   protected string $messageProfileId;
-
-  // Public variables -- must be set/changed with every MSH seg
-  public string $sendingFacility = 'ediHQ';
-  public string $receivingApplication = '1.4.2-SNAPSHOT';
-  public string $receivingFacility = 'NIST Test Iz Reg';
-  public string $security = '';
-  public string $processingId = 'P';
-  public string $sequenceNumber = '';
-  public string $continuationPointer = '';
-  public string $acceptAcknowledgmentType = 'ER';
-  public string $applicationAcknowledgmentType = 'AL';
-  public string $countryCode = 'USA';
-  public string $principalLanguage = 'en^English^639-1^eng^English^639-2';
-  public string $alternateCharacterSetHandling = '';
 
   // Concrete class must define contruct function that returns void
   // Constructor MUST set messageControlId string!
@@ -39,7 +39,10 @@ abstract class MSH {
 
   // Provide public function to get the messageControlId from class instance
   public function getControlId(): string {
-    return $this->messageControlId;
+    return sprintf(
+      "%.20s",
+      $this->messageControlId
+    );
   }
 
   // Provide public function to set the messageControlId from class instance
@@ -47,6 +50,126 @@ abstract class MSH {
     $this->messageControlId = sprintf(
       "%.20s",
       $controlId
+    );
+  }
+
+  public function setSendingApplication(
+  string $namespaceId,
+  ?string $universalId = null,
+  ?string $universalIdType = null): void {
+    $sendingApplication = sprintf(
+      "%.227s^",
+      $namespaceId
+    );
+    if ($universalId !== null){
+      $sendingApplication .= sprintf(
+        "%.226s^",
+        $universalId
+      );
+    } else {
+      $sendingApplication .= "^";
+    }
+    if ($universalIdType !== null){
+      $sendingApplication .= sprintf(
+        "%.225s^",
+        $universalIdType
+      );
+    } else {
+      $sendingApplication .= "^";
+    }
+    $this->sendingApplication = sprintf(
+      "%.227s",
+      rtrim($sendingApplication, '^')
+    );
+  }
+
+  public function setSendingFacility(
+  string $namespaceId,
+  ?string $universalId = null,
+  ?string $universalIdType = null): void {
+    $sendingFacility = sprintf(
+      "%.227s^",
+      $namespaceId
+    );
+    if ($universalId !== null){
+      $sendingFacility .= sprintf(
+        "%.226s^",
+        $universalId
+      );
+    } else {
+      $sendingFacility .= "^";
+    }
+    if ($universalIdType !== null){
+      $sendingFacility .= sprintf(
+        "%.225s^",
+        $universalIdType
+      );
+    } else {
+      $sendingFacility .= "^";
+    }
+    $this->sendingFacility = sprintf(
+      "%.227s",
+      rtrim($sendingFacility, '^')
+    );
+  }
+
+  public function setReceivingApplication(
+  string $namespaceId,
+  ?string $universalId = null,
+  ?string $universalIdType = null): void {
+    $receivingApplication = sprintf(
+      "%.227s^",
+      $namespaceId
+    );
+    if ($universalId !== null){
+      $receivingApplication .= sprintf(
+        "%.226s^",
+        $universalId
+      );
+    } else {
+      $receivingApplication .= "^";
+    }
+    if ($universalIdType !== null){
+      $receivingApplication .= sprintf(
+        "%.225s^",
+        $universalIdType
+      );
+    } else {
+      $receivingApplication .= "^";
+    }
+    $this->receivingApplication = sprintf(
+      "%.227s",
+      rtrim($receivingApplication, '^')
+    );
+  }
+
+  public function setReceivingFacility(
+  string $namespaceId,
+  ?string $universalId = null,
+  ?string $universalIdType = null): void {
+    $receivingFacility = sprintf(
+      "%.227s^",
+      $namespaceId
+    );
+    if ($universalId !== null){
+      $receivingFacility .= sprintf(
+        "%.226s^",
+        $universalId
+      );
+    } else {
+      $receivingFacility .= "^";
+    }
+    if ($universalIdType !== null){
+      $receivingFacility .= sprintf(
+        "%.225s^",
+        $universalIdType
+      );
+    } else {
+      $receivingFacility .= "^";
+    }
+    $this->receivingFacility = sprintf(
+      "%.227s",
+      rtrim($receivingFacility, '^')
     );
   }
 
