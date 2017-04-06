@@ -3,6 +3,7 @@
 class VXU_V04_Test extends PHPUnit_Framework_TestCase {
 
   public function testValidFloridaShotsMSH() {
+    // Create & verify typical FloridaShots MSH Segment with no bad characters
     $test = new Immunable\Messages\VXU\V04\Segments\MSH();
     $test->setSendingApplication('Immunable', 'ediHQ');
     $test->setSendingFacility('Assigned ID', 'Office Location Name');
