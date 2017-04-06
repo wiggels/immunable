@@ -203,4 +203,13 @@ abstract class MSH {
     $segment = rtrim($segment, '|') . "\r";
     return $segment;
   }
+
+  // Provide public function to get the MSH creation date/time (usually for tests)
+  public function getDateTime(): string {
+    return sprintf(
+      "%.26s",
+      $this->dateTime->format('YmdHisO')
+    );
+  }
+
 }
