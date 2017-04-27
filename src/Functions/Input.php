@@ -1,8 +1,5 @@
 <?hh // strict
 
-// Patient Identification Segment
-//   Primary means of communicating patient identification information
-
 namespace Immunable\Functions;
 
 class Input {

@@ -47,11 +47,11 @@ abstract class PID {
 
   public function getHL7(): string {
     $out  = sprintf('PID|');
-    $out .= sprintf("%s|", $this->setId);
-    $out .= sprintf("%s|", ''); // Unused
-    $out .= sprintf("%s|", $this->getPID_3());
-    $out .= sprintf("%s|", ''); // Unused
-    
+    $out .= sprintf("%.4s|", $this->setId);
+    $out .= sprintf("%.20s|", ''); // Unused
+    $out .= sprintf("%.250s|", $this->getPID_3());
+    $out .= sprintf("%.20s|", ''); // Unused
+
     return rtrim($out, '|');
   }
 
