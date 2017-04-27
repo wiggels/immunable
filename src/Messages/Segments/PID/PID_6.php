@@ -1,11 +1,11 @@
 <?hh // strict
 
-// PID-5 Patient name
-//   The field contains the names for the patient
+// PID-6 Mother's Maiden Name
+//   Family name under which mother was born (i.e. before marriage)
 
 namespace Immunable\Messages\Segments;
 
-class PID_5 {
+class PID_6 {
 
   protected string $familyName;
   protected string $givenName;
@@ -13,7 +13,7 @@ class PID_5 {
   protected ?string $suffix;
   protected ?string $prefix;
   protected ?string $degree;
-  protected string $nameTypeCode = 'L'; // Set as L for Legal Name as default
+  protected string $nameTypeCode = 'M'; // Set as L for Legal Name as default
   protected string $nameRepresentationCode = 'A'; // Set as A as default
   protected ?string $nameContext;
   protected ?string $nameValidityRange;
@@ -34,14 +34,6 @@ class PID_5 {
     $this->secondName = $secondName;
     $this->suffix = $suffix;
     $this->prefix = $prefix;
-  }
-
-  public function setNameTypeCode(string $value): void {
-    invariant(
-      \Immunable\DataTables\NameType::isValid($value),
-      'Value passed to setNameTypeCode is not valid (HL7 Table 0200)'
-    );
-    $this->nameTypeCode = $value;
   }
 
   public function getHL7(): string {
