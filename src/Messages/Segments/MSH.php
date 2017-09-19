@@ -3,6 +3,7 @@
 // Abstract Message Header Segment
 //   Defines intent, source, destination, and specifics of message
 //   *Must be extended by more specific implimentation
+// comment
 
 namespace Immunable\Messages\Segments;
 
